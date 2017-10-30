@@ -1,14 +1,19 @@
-import React, { Component } from 'react';
-import './App.css';
+import React from "react";
+import ReactDOM from "react-dom";
+import { createStore } from "redux";
+import { Provider } from "react-redux";
+import shoppingListItemReducer from "./reducers/shoppingListItemReducer";
+import App from "./App";
+import "./index.css";
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        App component
-      </div>
-    );
-  }
-};
+const store = createStore(
+  shoppingListItemReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+); /* code change */
 
-export default App;
+ReactDOM.render(
+  <Provider store={store}>
+    <App store={store} />
+  </Provider>,
+  document.getElementById("root")
+);
